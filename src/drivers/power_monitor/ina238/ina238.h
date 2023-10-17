@@ -335,6 +335,7 @@ private:
 	float _rshunt;
 	float _current_lsb;
 	int16_t _range;
+	uint16_t _shunt_calibration{0};
 
 	Battery _battery;
 	uORB::SubscriptionInterval _parameter_update_sub{ORB_ID(parameter_update), 1_s};

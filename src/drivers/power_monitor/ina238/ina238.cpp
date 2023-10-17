@@ -118,13 +118,13 @@ int INA238::init()
 		return ret;
 	}
 
-	uint16_t shunt_calibration = static_cast<uint16_t>(INA238_CONST * _current_lsb * _rshunt);
+	_shunt_calibration = static_cast<uint16_t>(INA238_CONST * _current_lsb * _rshunt);
 
 	if (_range == INA238_ADCRANGE_LOW) {
-		shunt_calibration *= 4;
+		_shunt_calibration *= 4;
 	}
 
-	if (write(INA238_REG_SHUNTCAL, shunt_calibration) < 0) {
+	if (write(INA238_REG_SHUNTCAL, _shunt_calibration) < 0) {
 		return -3;
 	}
 
@@ -189,9 +189,16 @@ int INA238::collect()
 	bool success{true};
 	int16_t bus_voltage{0};
 	int16_t current{0};
+	uint16_t shunt_cal{0};
 
 	success = success && (read(INA238_REG_VSBUS, bus_voltage) == PX4_OK);
 	success = success && (read(INA238_REG_CURRENT, current) == PX4_OK);
+	success = success && (read(INA238_REG_SHUNTCAL, shunt_cal) == PX4_OK);
+
+	if (success && shunt_cal != _shunt_calibration) {
+		PX4_DEBUG("shunt calibration incorrect, updating");
+		write(INA238_REG_SHUNTCAL, _shunt_calibration);
+	}
 
 	if (!success) {
 		PX4_DEBUG("error reading from sensor");
