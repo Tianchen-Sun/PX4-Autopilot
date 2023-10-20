@@ -5,7 +5,13 @@
 
 board_adc start
 
-mpu6000 -R 6 -s start
+# There are 2 variants of the Flywoo GN405S AIO boards, which differ in their IMUs.
+# One has ICM42688P and the other has MPU6000
+if ! icm42688p -R 6 -s start
+then
+	mpu6000 -R 6 -s start
+fi
 
-# Start Baro
+# bmp280 -s start (internal)
 bmp280 -X start
+# qmc5883l -X start
