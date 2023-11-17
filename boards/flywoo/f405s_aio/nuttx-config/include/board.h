@@ -257,7 +257,7 @@
  *
  * PC10 (TX) and PC11 (RX) are broken out on J4
  *
- * However, this port is shared with SPI3 which contains the BMP280 and MAX7456
+ * However, this port is shared with I2C which contains the BMP280 and MAX7456
  *
  * The Silkscreen pin labeled SCL is TX
  *                           MISO is RX
@@ -283,11 +283,11 @@
 #define GPIO_USART6_TX GPIO_USART6_TX_1
 
 /* SPI1:
- *  MPU6000 ICM42699P
- *  CS: PA4 -- configured in board_config.h
- *  CLK: PA5
- *  MISO: PA6
- *  MOSI: PA7
+ *  IMU: MPU6000 or ICM42699P
+ *  CS: PA4 -- configured in board_config.h,  GPIO_SPI2_NSS_1 : GPIO_PORTB|GPIO_PIN12
+ *  CLK: PA5  ,                               GPIO_SPI1_SCK_1     GPIO_PORTA|GPIO_PIN5
+ *  MISO: PA6 ,                               GPIO_SPI1_MISO_1    GPIO_PORTA|GPIO_PIN6
+ *  MOSI: PA7 ,                               GPIO_SPI1_MOSI_1    GPIO_PORTA|GPIO_PIN7
  */
 
 #define GPIO_SPI1_SCK  GPIO_SPI1_SCK_1
@@ -296,22 +296,21 @@
 
 /* SPI2:
  *  SD Card
- *  CS: PB12 -- configured in board_config.h
- *  CLK: PB13
- *  MISO: PB14
- *  MOSI: PB15
+ *  CS: PB12 -- configured in board_config.h,  GPIO_SPI1_SCK_2/GPIO_SPI3_SCK_1: GPIO_PORTB|GPIO_PIN3
+ *  CLK: PB13 ,                                GPIO_SPI2_SCK                    GPIO_PORTI|GPIO_PIN1
+ *  MISO: PB14,                                GPIO_SPI2_MISO                   GPIO_PORTI|GPIO_PIN2
+ *  MOSI: PB15,                                GPIO_SPI2_MOSI                   GPIO_PORTI|GPIO_PIN3
  */
 
-#define GPIO_SPI2_SCK	  GPIO_SPI2_SCK_3
+#define GPIO_SPI2_SCK	GPIO_SPI2_SCK_3
 #define GPIO_SPI2_MISO	GPIO_SPI2_MISO_3
 #define GPIO_SPI2_MOSI	GPIO_SPI2_MOSI_3
 
 /* SPI3:
- *  BMP280
- *  CS: PB3 -- configured in board_config.h
- *  CLK: PC10
- *  MISO: PC11
- *  MOSI: PC12
+ *  CS: PB3 -- configured in board_config.h,  GPIO_SPI3_NSS_1 : GPIO_PORTA|GPIO_PIN15
+ *  CLK: PC10                                 GPIO_SPI3_SCK_2 : GPIO_PORTC|GPIO_PIN10
+ *  MISO: PC11                                GPIO_SPI3_MISO_2: GPIO_PORTC|GPIO_PIN11
+ *  MOSI: PC12                                GPIO_SPI3_MOSI_2: GPIO_PORTC|GPIO_PIN12
  */
 
 #define GPIO_SPI3_SCK  GPIO_SPI3_SCK_2
@@ -319,10 +318,10 @@
 #define GPIO_SPI3_MOSI GPIO_SPI3_MOSI_2
 
 /*
- * I2C (external)
+ * I2C (external): Barometer BMP280 is used here
  *
- * SCL: PB10
- * SDA: PB11
+ * SCL: PB10  : SPI2_SCK / I2C2_SCL/ USART3_TX
+ * SDA: PB11  :            I2C2_SDA/ USART3_RX/
  *
  * TODO:
  *   The optional _GPIO configurations allow the I2C driver to manually

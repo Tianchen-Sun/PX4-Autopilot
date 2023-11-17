@@ -106,3 +106,8 @@ src/modules/simulator/simulator_config.h
 src/systemcmds/topic_listener/listener_generated.cpp
 
 !src/drivers/distance_sensor/broadcom/afbrs50/Lib/*
+.vscode/settings.json
+.vscode/settings.json
+boards/flywoo/f405s_aio/.vscode/c_cpp_properties.json
+boards/flywoo/f405s_aio/.vscode/settings.json
+.vscode/settings.json

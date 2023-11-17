@@ -5,13 +5,20 @@
 
 board_adc start
 
-# new boards are using ICM42688p
+# Star up IMUs. New boards are using ICM42688p, old board is using mpu6000
 if ! icm42688p -R 6 -s start
 then
-
 	mpu6000 -R 6 -s start
 fi
 
-# bmp280 -s start (internal)
-bmp280 -X start
+# https://docs.px4.io/main/en/modules/modules_driver_baro.html
+
+# Barometer for new drone
+if ! spl06 -X start
+then
+	# Barometer for old drone
+	bmp280 -X start
+fi
+
+# Externel Magnetometer
 # qmc5883l -X start

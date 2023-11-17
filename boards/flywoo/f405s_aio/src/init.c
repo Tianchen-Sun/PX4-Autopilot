@@ -261,7 +261,7 @@ __EXPORT int board_app_initialize(uintptr_t arg)
 
 	/* Configure SPI-based devices */
 
-	// SPI1: MPU6000
+	// SPI1: MPU6000/ICM42688P
 	spi1 = stm32_spibus_initialize(1);
 
 	if (!spi1) {

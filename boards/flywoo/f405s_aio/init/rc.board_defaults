@@ -4,28 +4,37 @@
 #------------------------------------------------------------------------------
 
 # system_power unavailable
-# param set-default CBRK_SUPPLY_CHK 894281
+param set-default CBRK_SUPPLY_CHK 894281
 
 # Disable safety switch by default
 param set-default CBRK_IO_SAFETY 22027
 
-# (Dont listen to this) use the Q attitude estimator, it works w/o mag or GPS.
+param set-default ek2_aid_mask 0
+
 # use the EKF2, it works better than LPE.
-# param set-default SYS_MC_EST_GROUP 2
+param set-default SYS_MC_EST_GROUP 2
 # param set-default ATT_ACC_COMP 0
 # param set-default ATT_W_ACC 0.4000
 # param set-default ATT_W_GYRO_BIAS 0.0000
 
-# param set-default SYS_HAS_MAG 1
+param set-default SYS_HAS_GPS 0
+param set-default SYS_HAS_MAG 0
 
 # GPS is on Uart6
-param set-default GPS_1_CONFIG 6
+param set-default GPS_1_CONFIG 0
 
 # Telemetry (onboard) is on Uart4
 param set-default MAV_0_CONFIG 102
 param set-default MAV_0_MODE 2
 
 # Set serial rates
-param set-default SER_TEL1_BAUD 500000
-param set-default SER_TEL2_BAUD 500000
+param set-default SER_TEL1_BAUD 230400
+param set-default SER_TEL2_BAUD 230400
 param set-default SER_URT6_BAUD 9600
+
+# Battery settings
+param set-default BAT1_N_CELLS 3
+param set-default BAT1_V_DIV 11
+
+# Motor ordering for PX4
+param set-default MOT_ORDERING 1
