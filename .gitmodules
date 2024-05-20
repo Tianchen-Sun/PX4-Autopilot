@@ -53,6 +53,7 @@
 [submodule "src/lib/events/libevents"]
 	path = src/lib/events/libevents
 	url = https://github.com/mavlink/libevents.git
+	branch = 59f7f5c0ec2e76fadbc1dc40cc0705d614472edc
 [submodule "Tools/simulation-ignition"]
 	path = Tools/simulation-ignition
 	url = https://github.com/PX4/px4-simulation-ignition.git
